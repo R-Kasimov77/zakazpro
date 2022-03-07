@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:zakazpro/screens/choose_city/components/custom_choose_region.dart';
-import 'package:zakazpro/utils/app_colors.dart';
 
 class ChooseRegion extends StatelessWidget {
   const ChooseRegion({Key? key}) : super(key: key);
@@ -17,7 +16,7 @@ class ChooseRegion extends StatelessWidget {
                 children: [
                   InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/choose_city');
+                        Navigator.pop(context);
                       },
                       child: Icon(Icons.arrow_back)),
                   SizedBox(
@@ -32,6 +31,18 @@ class ChooseRegion extends StatelessWidget {
               TextField(
                 decoration: InputDecoration(
                     hintText: "Поиск", prefixIcon: Icon(Icons.search)),
+              ),
+              SizedBox(height: 24),
+              ListView.builder(
+                itemCount: 3,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/choose_city');
+                      },
+                      child: CustomChooseRegion(text: "московская область"));
+                },
               ),
             ],
           ),

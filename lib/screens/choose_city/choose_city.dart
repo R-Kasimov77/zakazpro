@@ -15,10 +15,10 @@ class ChooseCity extends StatelessWidget {
               Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                       Navigator.pushNamed(context, '/registration_first_screen');
-                    },
-                    child: Icon(Icons.arrow_back)),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.arrow_back)),
                   SizedBox(
                     width: 70,
                   ),
@@ -32,9 +32,18 @@ class ChooseCity extends StatelessWidget {
                 decoration: InputDecoration(
                     hintText: "Поиск", prefixIcon: Icon(Icons.search)),
               ),
-              CustomChooseCity(text: "Москва"),
-              CustomChooseCity(text: "Питер"),
-              CustomChooseCity(text: "Астрахань")
+              ListView.builder(
+                itemCount: 3,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, '/registration_first_screen');
+                      },
+                      child: CustomChooseCity(text: "московская область"));
+                },
+              ),
             ],
           ),
         ),

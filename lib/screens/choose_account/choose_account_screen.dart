@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zakazpro/screens/choose_account/components/custom_container.dart';
+import 'package:zakazpro/utils/app_colors.dart';
+import 'package:zakazpro/widgets/custom_button.dart';
 
 class ChooseAccountScreen extends StatelessWidget {
   const ChooseAccountScreen({
@@ -26,13 +27,33 @@ class ChooseAccountScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
-                InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/presentation');
-                    },
-                    child: CustomContainer(text: "Заказчик")),
-                CustomContainer(text: "Исполнитель (частник)"),
-                CustomContainer(text: "Исполнитель (Фирма)"),
+                ListView.builder(
+                  itemCount: 3,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, '/registration_first_screen');
+                      },
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/presentation');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: CustomButton(
+                            text: 'Заказчик',
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/presentation');
+                            },
+                            backgroundColor: AppColors.blue,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -41,5 +62,3 @@ class ChooseAccountScreen extends StatelessWidget {
     );
   }
 }
-
-
