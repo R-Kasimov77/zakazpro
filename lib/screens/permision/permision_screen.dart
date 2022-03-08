@@ -28,7 +28,9 @@ class PermisionScreen extends StatelessWidget {
                   CustomButton(
                     width: MediaQuery.of(context).size.width / 2.5,
                     text: 'Согласен',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/menu');
+                    },
                     backgroundColor: AppColors.blue,
                   ),
                   CustomButton(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:zakazpro/utils/app_colors.dart';
 import 'package:zakazpro/utils/styles.dart';
 import 'package:zakazpro/widgets/scale_animated_container.dart';
 
@@ -12,6 +13,7 @@ class CustomButton extends StatefulWidget {
   final double width;
   final double height;
   final bool isDisabled;
+  final Color textColor;
 
   CustomButton({
     required this.text,
@@ -21,6 +23,7 @@ class CustomButton extends StatefulWidget {
     this.width = 0.0,
     this.height = 56.0,
     this.isDisabled = false,
+    this.textColor =  AppColors.white,
   });
 
   @override
@@ -84,7 +87,7 @@ class _CustomButtonState extends State<CustomButton> {
                               valueColor:
                                   AlwaysStoppedAnimation<Color>(Styles.white))
                           : Text(widget.text,
-                              style: Styles.ts16(Styles.white)))),
+                              style: Styles.ts16(widget.textColor)))),
             )
           : Container(
               decoration: BoxDecoration(

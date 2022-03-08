@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zakazpro/screens/choose_account/choose_account_screen.dart';
 import 'package:zakazpro/screens/choose_city/choose_city.dart';
 import 'package:zakazpro/screens/choose_city/choose_region.dart';
+import 'package:zakazpro/screens/home/detail_screen.dart';
+import 'package:zakazpro/screens/menu/menu.dart';
 import 'package:zakazpro/screens/permision/permision_screen.dart';
 import 'package:zakazpro/screens/presentation/presentation_screen.dart';
 import 'package:zakazpro/screens/public_offer/public_offer_screen.dart';
@@ -29,6 +31,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => PublicOfferScreen());
       case '/premision_screen':
         return MaterialPageRoute(builder: (context) => PermisionScreen());
+      case '/menu':
+        return MaterialPageRoute(builder: (context) => Menu());
+      case '/detail':
+        return MaterialPageRoute(builder: (context) => Detailscreen());
+
       default:
         return MaterialPageRoute(builder: (context) => ChooseAccountScreen());
     }
