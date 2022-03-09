@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zakazpro/screens/my_orders/components/custom_my_orders_container.dart';
 import 'package:zakazpro/utils/app_colors.dart';
+import 'package:zakazpro/widgets/scale_animated_container.dart';
 
 class MyOrdersScreen extends StatelessWidget {
   MyOrdersScreen({Key? key}) : super(key: key);
@@ -46,41 +47,40 @@ class MyOrdersScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ValueListenableBuilder(
-                valueListenable: isClosedOrders,
-                builder: (context,str,_) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: !isClosedOrders.value
-                                ? Colors.blueGrey.shade200
-                                : Colors.transparent,
-                            minimumSize: Size(180, 50),
-                            primary: Colors.black,
-                            side: BorderSide(color: Colors.black)),
-                        onPressed: () {
-                          isClosedOrders.value = false;
-                        },
-                        child: Text("Актуальные"),
-                      ),
-                      OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: isClosedOrders.value
-                                ? Colors.blueGrey.shade200
-                                : Colors.transparent,
-                            minimumSize: Size(180, 50),
-                            primary: Colors.black,
-                            side: BorderSide(color: Colors.black)),
-                        onPressed: () {
-                          isClosedOrders.value = true;
-                        },
-                        child: Text("Закрытые"),
-                      )
-                    ],
-                  );
-                }
-              ),
+                  valueListenable: isClosedOrders,
+                  builder: (context, str, _) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: !isClosedOrders.value
+                                  ? Colors.blueGrey.shade200
+                                  : Colors.transparent,
+                              minimumSize: Size(180, 50),
+                              primary: Colors.black,
+                              side: BorderSide(color: Colors.black)),
+                          onPressed: () {
+                            isClosedOrders.value = false;
+                          },
+                          child: Text("Актуальные"),
+                        ),
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: isClosedOrders.value
+                                  ? Colors.blueGrey.shade200
+                                  : Colors.transparent,
+                              minimumSize: Size(180, 50),
+                              primary: Colors.black,
+                              side: BorderSide(color: Colors.black)),
+                          onPressed: () {
+                            isClosedOrders.value = true;
+                          },
+                          child: Text("Закрытые"),
+                        )
+                      ],
+                    );
+                  }),
             ),
             ValueListenableBuilder(
               valueListenable: isClosedOrders,
@@ -90,9 +90,13 @@ class MyOrdersScreen extends StatelessWidget {
                   itemCount: 8,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return isClosedOrders.value
-                        ? CustomMyOrdersContainer(isCLosed: true)
-                        : CustomMyOrdersContainer();
+                    return ScaleAnimationContainer(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/detail_order');
+                      },
+                        child: isClosedOrders.value
+                            ? CustomMyOrdersContainer(isCLosed: true)
+                            : CustomMyOrdersContainer());
                   },
                 );
               },
