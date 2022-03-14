@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zakazpro/screens/presentation/components/custom_container.dart';
+import 'package:zakazpro/screens/welcome/presentation/components/custom_container.dart';
 import 'package:zakazpro/utils/app_colors.dart';
 
 class PresentationScreen extends StatelessWidget {

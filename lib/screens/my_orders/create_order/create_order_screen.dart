@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
-import 'package:zakazpro/screens/create_order/components/custom_chek_box_container.dart';
-import 'package:zakazpro/screens/create_order/components/custom_text_field.dart';
+import 'package:zakazpro/screens/my_orders/create_order/components/custom_chek_box_container.dart';
+import 'package:zakazpro/screens/my_orders/create_order/components/custom_text_field.dart';
 import 'package:zakazpro/utils/app_colors.dart';
 import 'package:zakazpro/widgets/scale_animated_container.dart';
 

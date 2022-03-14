@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zakazpro/screens/public_offer/components/custom_public_text.dart';
+import 'package:zakazpro/screens/welcome/public_offer/components/custom_public_text.dart';
 
 class PublicOfferScreen extends StatelessWidget {
   const PublicOfferScreen({Key? key}) : super(key: key);
