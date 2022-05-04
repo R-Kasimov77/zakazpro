@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:zakazpro/routes.dart';
+
+import 'package:zakazpro/screens/login/login_screen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: '/choose_account',
-      onGenerateRoute: (settings) => RouteGenerator.routes(settings: settings),
+      home: LoginScreen(),
     );
   }
 }
