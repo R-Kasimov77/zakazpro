@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zakazpro/logic/sign_in/cubit/sign_in_cubit.dart';
+import 'package:zakazpro/logic/sign_up/cubit/sign_up_cubit.dart';
 import 'package:zakazpro/widgets/custom_button.dart';
 import 'package:zakazpro/widgets/custom_text_field.dart';
 
@@ -17,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   final signInCubit = SignInCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

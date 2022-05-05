@@ -16,13 +16,14 @@ class SignUpProvider extends SignUpRepository {
     _dio = _dioSettings.dio;
   }
   @override
-  Future<String> signUp(String username, String password) async {
+  Future<String> signUp(String username, String password, String phone) async {
     try {
       final response = await _dio.post(
         'register/',
         queryParameters: {
           'username': username,
           'password': password,
+          'phone' : phone,
         },
       );
 

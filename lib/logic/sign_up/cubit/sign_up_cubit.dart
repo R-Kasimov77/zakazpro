@@ -9,10 +9,10 @@ class SignUpCubit extends Cubit<SignUpState> {
   final provider = SignUpProvider();
   SignUpCubit() : super(SignUpState.initial());
 
-  signUp(String username, String password) async {
+  signUp(String username, String password, String phone) async {
     emit(SignUpState.loading());
     try {
-      final response = await provider.signUp(username, password);
+      final response = await provider.signUp(username, password, phone);
       emit(SignUpState.loaded(response));
     } catch (e) {
       emit(
