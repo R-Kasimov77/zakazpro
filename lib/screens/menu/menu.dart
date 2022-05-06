@@ -38,11 +38,11 @@ class _MenuState extends State<Menu> {
             label: "мои заказы",
             backgroundColor: Colors.blue,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: "Создать заказ",
-            backgroundColor: Colors.blue,
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.add),
+          //   label: "Создать заказ",
+          //   backgroundColor: Colors.blue,
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
             label: "chat",
