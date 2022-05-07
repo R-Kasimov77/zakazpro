@@ -13,14 +13,15 @@ class PublicOfferScreen extends StatelessWidget {
           child: Column(
             children: [
               Center(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BackButton(),
-                  Text("Публичная оферта"),
-                  SizedBox()
-                ],
-              )),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BackButton(),
+                    Text("Публичная оферта"),
+                    SizedBox(),
+                  ],
+                ),
+              ),
               CustomPublicText(),
               CustomPublicText(),
               CustomPublicText()

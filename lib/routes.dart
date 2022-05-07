@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zakazpro/screens/chat/chat_screen.dart';
 import 'package:zakazpro/screens/home/detail_screen.dart';
+import 'package:zakazpro/screens/login/login_screen.dart';
 import 'package:zakazpro/screens/menu/menu.dart';
 import 'package:zakazpro/screens/my_orders/detail_order_screen.dart';
 import 'package:zakazpro/screens/profile/data/my_job/my_job_screen.dart';
@@ -22,6 +23,8 @@ import 'package:zakazpro/screens/welcome/registration/registration_second_screen
 class RouteGenerator {
   static Route<dynamic> routes({required RouteSettings settings}) {
     switch (settings.name) {
+      case '/login':
+        return MaterialPageRoute(builder: (context) => LoginScreen());
       case '/choose_account':
         return MaterialPageRoute(builder: (context) => ChooseAccountScreen());
       case '/presentation':
