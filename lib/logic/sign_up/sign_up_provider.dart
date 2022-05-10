@@ -20,10 +20,10 @@ class SignUpProvider extends SignUpRepository {
     try {
       final response = await _dio.post(
         'register/',
-        queryParameters: {
+        data: {
           'username': username,
           'password': password,
-          'phone' : phone,
+          'phone': phone,
         },
       );
 
@@ -32,6 +32,4 @@ class SignUpProvider extends SignUpRepository {
       throw CatchException.convertException(e);
     }
   }
-
-
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zakazpro/logic/sign_in/cubit/sign_in_cubit.dart';
 import 'package:zakazpro/logic/sign_up/cubit/sign_up_cubit.dart';
+import 'package:zakazpro/widgets/app_toasts.dart';
 import 'package:zakazpro/widgets/custom_button.dart';
 import 'package:zakazpro/widgets/custom_text_field.dart';
 
@@ -44,7 +44,7 @@ class _RegistrationFirstScreenState extends State<RegistrationFirstScreen> {
                   height: 10,
                 ),
                 Text(
-                  "Войти",
+                  "Зарегистрироваться",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
@@ -83,18 +83,32 @@ class _RegistrationFirstScreenState extends State<RegistrationFirstScreen> {
                           orElse: () {},
                           loaded: (token) {
                             print(token);
-                            Navigator.pushNamed(
-                                context, '/registration_second_screen');
+                            Navigator.pushNamed(context, '/menu');
                           },
                           failed: (e) {
-                            print("Ошибка");
+                            AppToasts().showBottomToast(
+                              'Введите данные корректно',
+                              context,
+                              true,
+                            );
                           });
                     },
                     child: CustomButton(
-                      text: 'Зарегитсрироваться',
+                      text: 'Зарегистрироваться',
                       onPressed: () {
-                        signUpCubit.signUp(phonecontroller.text,
-                            namecontroller.text, surnamecontroller.text);
+                        FocusScope.of(context).unfocus();
+                        if (phonecontroller.text.isEmpty ||
+                            namecontroller.text.isEmpty ||
+                            surnamecontroller.text.isEmpty) {
+                          AppToasts()
+                              .showBottomToast("Заполните поля", context, true);
+                        } else {
+                          signUpCubit.signUp(
+                            namecontroller.text,
+                            surnamecontroller.text,
+                            phonecontroller.text,
+                          );
+                        }
                       },
                       backgroundColor: Colors.blue,
                     ),

@@ -20,7 +20,7 @@ class SignInProvider extends SignInRepository {
     try {
       final response = await _dio.post(
         'auth/',
-        queryParameters: {
+        data: {
           'username': username,
           'password': password,
         },

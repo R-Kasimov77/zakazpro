@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zakazpro/routes.dart';
 
-import 'package:zakazpro/screens/login/login_screen.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
