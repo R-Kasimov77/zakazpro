@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:zakazpro/model/screens/detail_screen_arguments.dart';
 import 'package:zakazpro/screens/chat/chat_screen.dart';
 import 'package:zakazpro/screens/home/detail_screen.dart';
 import 'package:zakazpro/screens/login/login_screen.dart';
 import 'package:zakazpro/screens/menu/menu.dart';
+import 'package:zakazpro/screens/my_orders/components/custom_answer_container.dart';
+import 'package:zakazpro/screens/my_orders/components/custom_my_orders_container.dart';
 import 'package:zakazpro/screens/my_orders/detail_order_screen.dart';
 import 'package:zakazpro/screens/profile/data/my_job/my_job_screen.dart';
-import 'package:zakazpro/screens/profile/data/my_profile_screen.dart';
 import 'package:zakazpro/screens/profile/data/questions/instruction_screen.dart';
 import 'package:zakazpro/screens/profile/data/questions/questions_screen.dart';
 import 'package:zakazpro/screens/profile/data/settings/settings_message.dart';
@@ -23,6 +25,14 @@ import 'package:zakazpro/screens/welcome/registration/registration_second_screen
 class RouteGenerator {
   static Route<dynamic> routes({required RouteSettings settings}) {
     switch (settings.name) {
+      case '/my_orders_screen':
+        final arguments = settings.arguments as DetailScreenArguments;
+        return MaterialPageRoute(
+          builder: (context) => CustomMyOrdersContainer(
+            index: arguments.index,
+            orders: arguments.order.results,
+          ),
+        );
       case '/login':
         return MaterialPageRoute(builder: (context) => LoginScreen());
       case '/choose_account':
@@ -46,9 +56,21 @@ class RouteGenerator {
       case '/menu':
         return MaterialPageRoute(builder: (context) => Menu());
       case '/detail':
-        return MaterialPageRoute(builder: (context) => Detailscreen());
+        final arguments = settings.arguments as DetailScreenArguments;
+        return MaterialPageRoute(
+          builder: (context) => Detailscreen(
+            index: arguments.index,
+            order: arguments.order,
+          ),
+        );
       case '/detail_order':
-        return MaterialPageRoute(builder: (context) => DetailOrderScreen());
+        final arguments = settings.arguments as DetailScreenArguments;
+        return MaterialPageRoute(
+          builder: (context) => DetailOrderScreen(
+            index: arguments.index,
+            order: arguments.order,
+          ),
+        );
       case '/my_partfolio_screen':
         return MaterialPageRoute(builder: (context) => PartfolioScreen());
       case '/review_screen':

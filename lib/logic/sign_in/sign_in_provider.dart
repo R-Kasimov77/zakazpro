@@ -21,8 +21,8 @@ class SignInProvider extends SignInRepository {
       final response = await _dio.post(
         'auth/',
         data: {
-          'username': username,
-          'password': password,
+          'username': username.trim(),
+          'password': password.trim(),
         },
       );
 

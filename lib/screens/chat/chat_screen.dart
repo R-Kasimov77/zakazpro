@@ -123,58 +123,58 @@ class ChatScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       suffixIcon: InkWell(
                         onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) => Container(
-                              height: 200,
-                              color: Colors.white,
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Загрузить фото",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 10),
-                                      child: Center(
-                                        child: Container(
-                                          child: Center(child: Text("Из галлереи")),
-                                          height: 44,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey.shade300),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 10),
-                                      child: Center(
-                                        child: Container(
-                                          child: Center(child: Text("сделать фото с камеры")),
-                                          height: 44,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey.shade300),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
+                          // showModalBottomSheet(
+                          //   context: context,
+                          //   builder: (context) => Container(
+                          //     height: 200,
+                          //     color: Colors.white,
+                          //     width: MediaQuery.of(context).size.width,
+                          //     child: Padding(
+                          //       padding: const EdgeInsets.all(12),
+                          //       child: Column(
+                          //         crossAxisAlignment: CrossAxisAlignment.start,
+                          //         children: [
+                          //           Text(
+                          //             "Загрузить фото",
+                          //             style: TextStyle(fontSize: 16),
+                          //           ),
+                          //           Padding(
+                          //             padding: const EdgeInsets.only(
+                          //                 top: 10),
+                          //             child: Center(
+                          //               child: Container(
+                          //                 child: Center(child: Text("Из галлереи")),
+                          //                 height: 44,
+                          //                 width: MediaQuery.of(context)
+                          //                         .size
+                          //                         .width /
+                          //                     1.2,
+                          //                 decoration: BoxDecoration(
+                          //                     color: Colors.grey.shade300),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //           Padding(
+                          //             padding: const EdgeInsets.only(
+                          //                 top: 10),
+                          //             child: Center(
+                          //               child: Container(
+                          //                 child: Center(child: Text("сделать фото с камеры")),
+                          //                 height: 44,
+                          //                 width: MediaQuery.of(context)
+                          //                         .size
+                          //                         .width /
+                          //                     1.2,
+                          //                 decoration: BoxDecoration(
+                          //                     color: Colors.grey.shade300),
+                          //               ),
+                          //             ),
+                          //           )
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // );
                         },
                         child: Icon(
                           Icons.add_photo_alternate,

@@ -30,20 +30,16 @@ class MyProfileScreen extends StatelessWidget {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BackButton(),
-                      Text(
-                        "Мой профиль",
-                        style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800),
-                      ),
-                      SizedBox(),
-                      SizedBox()
-                    ],
+                  child:
+                      // BackButton(),
+                      Center(
+                    child: Text(
+                      "Мой профиль",
+                      style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800),
+                    ),
                   ),
                 ),
               ),
@@ -118,19 +114,93 @@ class MyProfileScreen extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(right: 8),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          border:
-                                              Border.all(color: Colors.grey)),
-                                      width: 120,
-                                      height: 120,
-                                      child: Center(
-                                        child: Text(
-                                          "Photo",
-                                          style: TextStyle(fontSize: 18),
-                                          textAlign: TextAlign.center,
+                                    child: InkWell(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                          context: context,
+                                          builder: (context) => Container(
+                                            height: 200,
+                                            color: Colors.white,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Загрузить фото",
+                                                    style:
+                                                        TextStyle(fontSize: 16),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10),
+                                                    child: Center(
+                                                      child: Container(
+                                                        child: Center(
+                                                            child: Text(
+                                                                "Из галлереи")),
+                                                        height: 44,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade300),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10),
+                                                    child: Center(
+                                                      child: Container(
+                                                        child: Center(
+                                                            child: Text(
+                                                                "сделать фото с камеры")),
+                                                        height: 44,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade300),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border:
+                                                Border.all(color: Colors.grey)),
+                                        width: 120,
+                                        height: 120,
+                                        child: Center(
+                                          child: Text(
+                                            "Photo",
+                                            style: TextStyle(fontSize: 18),
+                                            textAlign: TextAlign.center,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -196,8 +266,7 @@ class MyProfileScreen extends StatelessWidget {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8),
-                                      child: Icon(
-                                          Icons.border_color_outlined),
+                                      child: Icon(Icons.border_color_outlined),
                                     ),
                                   ],
                                 ),

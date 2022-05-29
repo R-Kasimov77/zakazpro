@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zakazpro/helpers/catch_exception.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zakazpro/logic/sign_in/cubit/sign_in_cubit.dart';
 import 'package:zakazpro/screens/welcome/public_offer/public_offer_screen.dart';
 import 'package:zakazpro/screens/welcome/registration/registration_first_screen.dart';
@@ -64,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       loaded: (token) {
                         Navigator.pushNamedAndRemoveUntil(
                             context, '/menu', (route) => false);
+                        setToken(token);
                       },
                       failed: (e) {
                         AppToasts().showBottomToast(
@@ -145,5 +146,10 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void setToken(String token) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setString('token', token);
   }
 }

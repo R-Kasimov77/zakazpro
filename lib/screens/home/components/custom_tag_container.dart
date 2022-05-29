@@ -15,13 +15,13 @@ class CustomTagContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 8, bottom: 8, top: 8),
+      padding: const EdgeInsets.only(right: 8, bottom: 10, top: 8),
       child: Container(
         decoration: BoxDecoration(
             color: backgroundcolor, borderRadius: BorderRadius.circular(8)),
         child: Padding(
           padding:
-              const EdgeInsets.only(right: 22, left: 22, bottom: 4, top: 4),
+              const EdgeInsets.only(right: 12, left: 12, top: 6, bottom: 6),
           child: Text(
             text,
             style: TextStyle(color: textcolor),

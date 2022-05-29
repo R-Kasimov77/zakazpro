@@ -1,13 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:zakazpro/logic/candidature/cubit/candidature_cubit.dart';
+import 'package:zakazpro/model/order.dart';
 import 'package:zakazpro/screens/home/components/custom_tag_container.dart';
 import 'package:zakazpro/utils/app_colors.dart';
+import 'package:zakazpro/widgets/app_toasts.dart';
 import 'package:zakazpro/widgets/custom_button.dart';
 
-class Detailscreen extends StatelessWidget {
-  const Detailscreen({Key? key}) : super(key: key);
+class Detailscreen extends StatefulWidget {
+  final int index;
+  final Order order;
+
+  const Detailscreen({
+    Key? key,
+    required this.index,
+    required this.order,
+  }) : super(key: key);
 
   @override
+  State<Detailscreen> createState() => _DetailscreenState();
+}
+
+class _DetailscreenState extends State<Detailscreen> {
+  final cubit = CandidatureCubit();
+  @override
   Widget build(BuildContext context) {
+    // final cubit = CandidatureCubit;
+    final candidaturecontroller = TextEditingController();
+    final _date = DateTime.tryParse(widget.order.results[widget.index].created);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,7 +51,7 @@ class Detailscreen extends StatelessWidget {
                           width: 18,
                         ),
                         Text(
-                          "Заказ № 2543534",
+                          "Заказ № ${widget.order.results[widget.index].id}",
                           style: TextStyle(
                               color: AppColors.white,
                               fontSize: 20,
@@ -53,7 +74,8 @@ class Detailscreen extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             right: 16, left: 16, bottom: 4, top: 4),
                         child: Text(
-                          "Сегодня в 18:19",
+                          DateFormat("${'dd.MM.yyyy'} в ${'HH:mm'}")
+                              .format(_date ?? DateTime.now()),
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -69,15 +91,11 @@ class Detailscreen extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             right: 16, left: 16, bottom: 4, top: 4),
                         child: Text(
-                          "Москва",
+                          widget.order.results[widget.index].city,
                           style: TextStyle(color: AppColors.black),
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    "(11 ответов)",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                   ),
                 ],
               ),
@@ -95,7 +113,7 @@ class Detailscreen extends StatelessWidget {
                       height: 12,
                     ),
                     Text(
-                      "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. In convallis eleifend ex. Nulla et \nmetus ac ante porttitor sollicitudin. Curabitur \nrhoncus tortor vel orci lacinia, vel venenatis erat \nfringilla. Morbi mattis, leo sed molestie mattis, \nodio est fermentum mi, et vestibulum quam elit et sem.",
+                      widget.order.results[widget.index].description,
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
@@ -109,7 +127,8 @@ class Detailscreen extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "Москва, Тверской пролет, дом 9",
+                      '${widget.order.results[widget.index].city}, ${widget.order.results[widget.index].address}',
+                      // "Москва, Тверской пролет, дом 9",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
@@ -122,18 +141,21 @@ class Detailscreen extends StatelessWidget {
                     Wrap(
                       children: [
                         CustomTagContainer(
-                          text: "Безнал",
+                          text: widget.order.results[widget.index].paymentTypes
+                              .toString(),
                           backgroundcolor: Colors.grey.shade300,
                           textcolor: AppColors.black,
                         ),
-                        CustomTagContainer(
-                            text: "Договор",
-                            backgroundcolor: Colors.grey.shade300,
-                            textcolor: AppColors.black,),
-                        CustomTagContainer(
-                            text: "Наличка",
-                            backgroundcolor: Colors.grey.shade300,
-                            textcolor: AppColors.black,),
+                        // CustomTagContainer(
+                        //   text: "Договор",
+                        //   backgroundcolor: Colors.grey.shade300,
+                        //   textcolor: AppColors.black,
+                        // ),
+                        // CustomTagContainer(
+                        //   text: "Наличка",
+                        //   backgroundcolor: Colors.grey.shade300,
+                        //   textcolor: AppColors.black,
+                        // ),
                       ],
                     ),
                     Text(
@@ -142,82 +164,113 @@ class Detailscreen extends StatelessWidget {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                     Wrap(
-                      children: [
-                        CustomTagContainer(
-                          text: "Сварщик",
-                          backgroundcolor: Colors.grey.shade300,
-                          textcolor: AppColors.black,
-                        ),
-                        CustomTagContainer(
-                          text: "Плиточник",
-                          backgroundcolor: Colors.grey.shade300,
-                          textcolor: AppColors.black,
-                        ),
-                        CustomTagContainer(
-                          text: "Прораб",
-                          backgroundcolor: Colors.grey.shade300,
-                          textcolor: AppColors.black,
-                        ),
-                        CustomTagContainer(
-                          text: "Инженер",
-                          backgroundcolor: Colors.grey.shade300,
-                          textcolor: AppColors.black,
-                        )
-                      ],
+                      children:
+                          widget.order.results[widget.index].workCategories
+                              .map(
+                                (workCategory) => CustomTagContainer(
+                                  text: workCategory.name ?? '',
+                                  backgroundcolor: Colors.grey.shade300,
+                                  textcolor: AppColors.black,
+                                ),
+                              )
+                              .toList(),
                     ),
                     Center(
                       child: CustomButton(
                         text: "Предложить кандидатуру",
                         onPressed: () {
                           showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        'Предложить свою кандидатуру',
-                                        style: TextStyle(
-                                            color: AppColors.black,
-                                            fontWeight: FontWeight.w600),
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Предложить свою кандидатуру',
+                                      style: TextStyle(
+                                          color: AppColors.black,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    TextField(
+                                      controller: candidaturecontroller,
+                                      decoration: InputDecoration(
+                                        hintText: "Текст вашего предложения",
                                       ),
-                                      TextField(
-                                        decoration: InputDecoration(
-                                          hintText: "Текст вашего предложения",
+                                    ),
+                                    SizedBox(height: 16),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        CustomButton(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3.5,
+                                          text: 'Отменить',
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          backgroundColor: Colors.grey,
                                         ),
-                                      ),
-                                      SizedBox(height: 16),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          CustomButton(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3.5,
-                                            text: 'Отменить',
-                                            onPressed: () =>
-                                                Navigator.pop(context),
-                                            backgroundColor: Colors.grey,
+                                        BlocProvider.value(
+                                          value: cubit,
+                                          child: BlocListener<CandidatureCubit,
+                                              CandidatureState>(
+                                            listener: (context, state) {
+                                              state.maybeWhen(
+                                                orElse: () {},
+                                                loaded: (response) {
+                                                  Navigator
+                                                      .pushNamedAndRemoveUntil(
+                                                          context,
+                                                          '/menu',
+                                                          (route) => false);
+                                                  AppToasts().showBottomToast(
+                                                    'Ваша кандиатура принята',
+                                                    context,
+                                                  );
+                                                },
+                                                failed: (e) {
+                                                  AppToasts().showBottomToast(
+                                                      "произошла ошибка",
+                                                      context,
+                                                      true);
+                                                },
+                                              );
+                                            },
+                                            child: CustomButton(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  3.5,
+                                              text: 'Предложить',
+                                              onPressed: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                if (candidaturecontroller
+                                                    .text.isEmpty) {
+                                                  AppToasts().showBottomToast(
+                                                      "введите текс",
+                                                      context,
+                                                      true);
+                                                } else {
+                                                  cubit.condidature(
+                                                      candidaturecontroller
+                                                          .text);
+                                                }
+                                              },
+                                              backgroundColor: AppColors.blue,
+                                            ),
                                           ),
-                                          CustomButton(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3.5,
-                                            text: 'Предложить',
-                                            onPressed: () =>
-                                                Navigator.pop(context),
-                                            backgroundColor: AppColors.blue,
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                );
-                              });
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          );
                         },
                         backgroundColor: Colors.blue,
                         width: 260,
@@ -233,3 +286,45 @@ class Detailscreen extends StatelessWidget {
     );
   }
 }
+
+// BlocProvider.value(
+//                                           value: cubit,
+//                                           child: BlocListener<CandidatureCubit,
+//                                               CandidatureState>(
+//                                             listener: (context, state) {
+//                                               state.maybeWhen(
+//                                                 orElse: () {},
+//                                                 loaded: (response) {},
+//                                                 failed: (e) {
+//                                                   AppToasts().showBottomToast(
+//                                                       "введите текс",
+//                                                       context,
+//                                                       true);
+//                                                 },
+//                                               );
+//                                             },
+//                                             child: CustomButton(
+//                                               width: MediaQuery.of(context)
+//                                                       .size
+//                                                       .width /
+//                                                   3.5,
+//                                               text: 'Предложить',
+//                                               onPressed: () {},
+//                                               backgroundColor: AppColors.blue,
+//                                             ),
+//                                           ),
+//                                         ),
+
+
+// BlocProvider(
+//                                           create: (context) => CandidatureCubit(),
+//                                           child: CustomButton(
+//                                             width: MediaQuery.of(context)
+//                                                     .size
+//                                                     .width /
+//                                                 3.5,
+//                                             text: 'Предложить',
+//                                             onPressed: () {},
+//                                             backgroundColor: AppColors.blue,
+//                                           ),
+//                                         ),

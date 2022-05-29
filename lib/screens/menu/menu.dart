@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zakazpro/screens/chat/all_dialogues_screen.dart';
 import 'package:zakazpro/screens/home/home_screen.dart';
+import 'package:zakazpro/screens/my_orders/create_order/create_order_screen.dart';
 import 'package:zakazpro/screens/my_orders/my_orders_screen.dart';
 import 'package:zakazpro/screens/profile/data/my_profile_screen.dart';
 
@@ -16,7 +17,7 @@ class _MenuState extends State<Menu> {
   var screens = [
     HomeScreen(), //главная
     MyOrdersScreen(), //мои заказы
-    // CreatOrderScreen(), //создать заказ
+    CreatOrderScreen(), //создать заказ
     AllDialoguesScreen(), //chat
     MyProfileScreen() //profile
   ];
@@ -38,11 +39,11 @@ class _MenuState extends State<Menu> {
             label: "мои заказы",
             backgroundColor: Colors.blue,
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.add),
-          //   label: "Создать заказ",
-          //   backgroundColor: Colors.blue,
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: "Создать заказ",
+            backgroundColor: Colors.blue,
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
             label: "chat",

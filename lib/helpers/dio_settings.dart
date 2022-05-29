@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DioSettings {
   DioSettings() {
@@ -30,6 +31,10 @@ class DioSettings {
 
     final headerInterceptors = QueuedInterceptorsWrapper(
       onRequest: (options, handler) async {
+        String token = await getToken();
+        if (token.isNotEmpty) {
+          options.headers['Authorization'] = 'Token $token';
+        }
         return handler.next(options);
       },
       onError: (DioError error, handler) {
@@ -44,5 +49,10 @@ class DioSettings {
       if (kDebugMode) logInterceptor,
       headerInterceptors,
     ]);
+  }
+
+  Future<String> getToken() async {
+    final preferences = await SharedPreferences.getInstance();
+    return preferences.getString('token') ?? '';
   }
 }

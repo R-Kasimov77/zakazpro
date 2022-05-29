@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:zakazpro/model/order.dart';
 import 'package:zakazpro/screens/home/components/custom_tag_container.dart';
 import 'package:zakazpro/utils/app_colors.dart';
 
 class CustomMyOrdersContainer extends StatelessWidget {
   final bool isCLosed;
-  const CustomMyOrdersContainer({Key? key, this.isCLosed = false})
+  final int index;
+  final List<Results> orders;
+  const CustomMyOrdersContainer(
+      {Key? key,
+      this.isCLosed = false,
+      required this.index,
+      required this.orders})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _date = DateTime.tryParse(orders[index].created);
     return Padding(
       padding: const EdgeInsets.all(4),
       child: Container(
@@ -18,52 +27,53 @@ class CustomMyOrdersContainer extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade400,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6),
-                      child: Text(
-                        "Сегодня в 18:19",
-                        style: TextStyle(color: Colors.white),
+            SizedBox(
+              height: 50,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade400,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8, left: 6, right: 6),
+                        child: Text(
+                          DateFormat("${'dd.MM.yyyy'} в ${'HH:mm'}")
+                              .format(_date ?? DateTime.now()),
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6),
-                      child: Text(
-                        "Сварщик",
-                        style: TextStyle(color: AppColors.black),
-                      ),
-                    ),
+                  Row(
+                    children: orders[index].workCategories
+                        .map((workCategory) => Container(
+                            margin: EdgeInsets.only(left: 4),
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Text(workCategory.name ?? '')))
+                        .toList(),
                   ),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                CustomTagContainer(
-                  text: isCLosed ? 'Закрытo' : '7/2 ответов',
-                  backgroundcolor: isCLosed ? Colors.red : Colors.blue,
-                  textcolor: AppColors.white,
-                )
-              ],
+                  SizedBox(
+                    width: 8,
+                  ),
+                  CustomTagContainer(
+                    text: isCLosed ? 'Закрытo' : '',
+                    backgroundcolor: isCLosed ? Colors.red : Colors.transparent,
+                    textcolor: AppColors.white,
+                  )
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 8, left: 8),
               child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis eleifend ex. Nulla et metus ac ante porttitor sollicitudin.",
+                orders[index].description,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ),
@@ -81,7 +91,7 @@ class CustomMyOrdersContainer extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(6),
                             child: Text(
-                              "Москва, Тверской пролет, дом 9",
+                              '${orders[index].city}, ${orders[index].address}',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -97,7 +107,7 @@ class CustomMyOrdersContainer extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8)),
                       child: Padding(
                         padding: const EdgeInsets.only(
-                            right: 12, left: 12, top: 2, bottom: 2),
+                            right: 12, left: 12, top: 2, bottom: 4),
                         child: Text(
                           "детали",
                           style: TextStyle(
