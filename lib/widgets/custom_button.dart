@@ -99,6 +99,7 @@ class _CustomButtonState extends State<CustomButton> {
                     style: BorderStyle.solid,
                   )),
               child: Align(
+               
                   child: Text(widget.text, style: Styles.ts16(Styles.white))),
             ),
     );

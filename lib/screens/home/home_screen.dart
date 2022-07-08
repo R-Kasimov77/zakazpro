@@ -51,11 +51,12 @@ class HomeScreen extends StatelessWidget {
                       itemCount: orders.results.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
-                        return ScaleAnimationContainer(
-                          onPressed: () {
-                            // Navigator.pushNamed(context, '/detail');
-                          },
-                          child: CustomOrderContainer(
+                        return (
+                          // onPressed: () {
+                          //   // Navigator.pushNamed(context, '/detail');
+                          // },
+                          // child: 
+                          CustomOrderContainer(
                               date: orders.results[index].created,
                               address:
                                   '${orders.results[index].city}, ${orders.results[index].address}',
@@ -72,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                                 );
                               },
                               workCategories:
-                                  orders.results[index].workCategories),
+                                  orders.results[index].workCategories)
                         );
                       },
                     ),

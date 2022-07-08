@@ -71,8 +71,8 @@ class RouteGenerator {
             order: arguments.order,
           ),
         );
-      case '/my_partfolio_screen':
-        return MaterialPageRoute(builder: (context) => PartfolioScreen());
+      // case '/my_partfolio_screen':
+      //   return MaterialPageRoute(builder: (context) => PartfolioScreen());
       case '/review_screen':
         return MaterialPageRoute(builder: (context) => ReviewScreen());
       case '/chat_screen':

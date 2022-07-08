@@ -1,7 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
+import 'package:zakazpro/logic/creat_order/cubit/creat_order_cubit.dart';
+import 'package:zakazpro/model/create_order_model.dart';
 import 'package:zakazpro/screens/my_orders/create_order/components/custom_chek_box_container.dart';
 import 'package:zakazpro/utils/app_colors.dart';
+import 'package:zakazpro/widgets/app_toasts.dart';
+import 'package:zakazpro/widgets/custom_button.dart';
 import 'package:zakazpro/widgets/custom_text_field.dart';
 
 class CreatOrderScreen extends StatefulWidget {
@@ -12,6 +19,11 @@ class CreatOrderScreen extends StatefulWidget {
 }
 
 class _CreatOrderScreenState extends State<CreatOrderScreen> {
+  final citycontroller = TextEditingController();
+  final adresscontroller = TextEditingController();
+  final exercisecontroller = TextEditingController();
+  final creatOrderCubit = CreatOrderCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,17 +84,25 @@ class _CreatOrderScreenState extends State<CreatOrderScreen> {
                   SizedBox(height: 10),
                   Text("В каком городе нужно выполнить работу?"),
                   SizedBox(height: 8),
-                  CustomTextField(hintText: "название города"),
+                  CustomTextField(
+                    hintText: "название города",
+                    controller: citycontroller,
+                  ),
                   SizedBox(height: 10),
                   Text("Укажите адрес"),
                   SizedBox(height: 8),
-                  CustomTextField(hintText: "адрес в свободном формате"),
+                  CustomTextField(
+                    hintText: "адрес в свободном формате",
+                    controller: adresscontroller,
+                  ),
                   SizedBox(height: 10),
                   Text("Описание задачи"),
                   SizedBox(height: 8),
                   CustomTextField(
-                      hintText: "опишите задачу"), // ListView.builder(
-                    // physics: NeverScrollableScrollPhysics(),
+                    hintText: "опишите задачу",
+                    controller: exercisecontroller,
+                  ), // ListView.builder(
+                  // physics: NeverScrollableScrollPhysics(),
                   //   itemCount: 3,
                   //   shrinkWrap: true,
                   //   itemBuilder: (BuildContext context, int index) {
@@ -111,6 +131,49 @@ class _CreatOrderScreenState extends State<CreatOrderScreen> {
                 ],
               ),
             ),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16, left: 12, right: 12),
+              child: BlocProvider.value(
+                value: creatOrderCubit,
+                child: BlocListener<CreatOrderCubit, CreatOrderState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      orElse: () {},
+                      loaded: (response) {
+                        print(citycontroller.text);
+                        AppToasts().showBottomToast("Заказ создан", context);
+                      },
+                      failed: (e) {
+                        AppToasts().showBottomToast("Ошибка", context, true);
+                      },
+                    );
+                  },
+                  child: CustomButton(
+                      text: "Создать заказ",
+                      onPressed: () {
+                        if (citycontroller.text.isEmpty ||
+                            adresscontroller.text.isEmpty ||
+                            exercisecontroller.text.isEmpty) {
+                          AppToasts().showBottomToast(
+                            "Заполните все поля",
+                            context,
+                            true,
+                          );
+                        } else {
+                          creatOrderCubit.creatorder(
+                            CreateOrderModel(
+                                paymentTypes: ['card'],
+                                city: 'City',
+                                address: 'adress',
+                                description: 'description'),
+                          );
+                        }
+                      },
+                      backgroundColor: Colors.blue),
+                ),
+              ),
+            )
           ],
         ),
       ),

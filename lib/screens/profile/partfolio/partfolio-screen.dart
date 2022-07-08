@@ -9,7 +9,8 @@ class PartfolioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
+          physics: ClampingScrollPhysics(),
           children: [
             Container(
               decoration: BoxDecoration(
@@ -21,7 +22,7 @@ class PartfolioScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Мой профиль",
+                     "Мой профиль",
                     style: TextStyle(
                         color: AppColors.white,
                         fontSize: 20,
@@ -32,7 +33,7 @@ class PartfolioScreen extends StatelessWidget {
             ),
             CustomParfolio(),
             CustomParfolio(),
-            CustomParfolio()
+            CustomParfolio(),
           ],
         ),
       ),

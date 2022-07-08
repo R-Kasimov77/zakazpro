@@ -13,13 +13,15 @@ class ReviewScreen extends StatelessWidget {
           physics: ClampingScrollPhysics(),
           children: [
             ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
-              itemCount: 10,
+              itemCount: 7,
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
                 return ScaleAnimationContainer(
                   onPressed: () {},
-                  child: CustomReview(),
+                  child: 
+                  CustomReview(),
                 );
               },
             ),

@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:zakazpro/logic/profile/cubit/profile_cubit.dart';
 
-class CustomPersonData extends StatelessWidget {
+class CustomPersonData extends StatefulWidget {
   final String text;
-  const CustomPersonData({Key? key, required this.text}) : super(key: key);
+  final Icon icon;
+  const CustomPersonData({Key? key, required this.text, 
+  required this.icon
+  })
+      : super(key: key);
+
+  @override
+  State<CustomPersonData> createState() => _CustomPersonDataState();
+}
+
+class _CustomPersonDataState extends State<CustomPersonData> {
+  final cubit = ProfileCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +23,13 @@ class CustomPersonData extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            text,
+            widget.text,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
           SizedBox(
             width: 24,
           ),
-          Icon(Icons.border_color_outlined)
+          widget.icon
         ],
       ),
     );

@@ -76,18 +76,19 @@ class _RegistrationFirstScreenState extends State<RegistrationFirstScreen> {
                 child: BlocListener<SignUpCubit, SignUpState>(
                   listener: (context, state) {
                     state.maybeWhen(
-                        orElse: () {},
-                        loaded: (token) {
-                          print(token);
-                          Navigator.pushNamed(context, '/menu');
-                        },
-                        failed: (e) {
-                          AppToasts().showBottomToast(
-                            'Введите данные корректно',
-                            context,
-                            true,
-                          );
-                        });
+                      orElse: () {},
+                      loaded: (token) {
+                        print(token);
+                        Navigator.pushNamed(context, '/menu');
+                      },
+                      failed: (e) {
+                        AppToasts().showBottomToast(
+                          'Введите данные корректно',
+                          context,
+                          true,
+                        );
+                      },
+                    );
                   },
                   child: CustomButton(
                     text: 'Зарегистрироваться',

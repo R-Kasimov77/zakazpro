@@ -48,15 +48,15 @@ class CustomParfolio extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/review_screen');
-                        },
-                        child: Icon(Icons.border_color_outlined)),
-                  ),
+                  // Spacer(),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 8),
+                  //   child: InkWell(
+                  //       onTap: () {
+                  //         Navigator.pushNamed(context, '/review_screen');
+                  //       },
+                  //       child: Icon(Icons.border_color_outlined)),
+                  // ),
                 ],
               ),
               Padding(
